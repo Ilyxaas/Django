@@ -1,3 +1,4 @@
+
 {% load static %}
 {% load blog_tags %}
 <!DOCTYPE html>
@@ -23,7 +24,11 @@
 			<li class="last"><a href="{% url m.url_name %}">{{m.title}}</a></li>
 	{% endif %}
 {% endfor %}
-				<li class="last"><a href="{% url 'register' %}">Регистрация</a> | <a href="{% url 'login' %}">Войти</a> </li>
+				{% if request.user.is_authenticated %}
+				<li class="last"> {{ user.username }} <a href="{% url 'logout' %}">Выйти</a></li>
+				{% else %}
+				<li class="last"><a href="{% url 'register' %}">Регистрация</a> <a href="{%  url 'login' %}">Войти</a></li>
+				{% endif %}
 			</ul>
 			<div class="clear"></div>
 		</div>
@@ -42,7 +47,7 @@
 		<li><a href="{% url 'home' %}">Все категории</a></li>
 {% endif %}
 
-{% get_categories 'name' cat_selected %}
+{% get_categories '-name' cat_selected%}
 
 	</ul>
 </td>
@@ -55,6 +60,17 @@
 <!-- Блок контента -->
 	<div class="content-text">
 {% block content %}
+		<h1>{{ title }}</h1>
+		<form method="post">
+			{% csrf_token %}
+			<div class="form-error">{{ form.non_field_errors }}</div>
+			{% for f in form %}
+			<p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label> {{ f }}</p>
+			<div class="form-error">{{ f.errors }}</div>
+			{% endfor %}
+
+			<button type="submit">Войти</button>
+		</form>
 {% endblock %}
 	</div>
 <!-- Конец блока контента -->

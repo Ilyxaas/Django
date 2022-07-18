@@ -5,7 +5,7 @@ from blog.views import *
 urlpatterns = [
     path('', BlogHome.as_view(), name='home'),
     path('about/', about, name='about'),
-    path('addpage/', AddPage.as_view(), name='add_page'),
+    path('addpage/', AddPage.as_view(), name='addpage'),
     path('cantact/', contact, name='contact'),
     path('logout/', logout_user, name='logout'),
     path('login/', LoginUser.as_view(), name='login'),

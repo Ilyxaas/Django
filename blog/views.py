@@ -11,10 +11,10 @@ from blog.utils import DataMixin
 from blog.forms import AddPostForm, RegisterUserForm, LoginUserForm
 from blog.models import *
 
-
 menu = [{'title': 'Добавить статью', 'url_name': 'addpage'},
         # {'title': 'Войти', 'url_name': 'login'}
         ]
+
 
 
 class RegisterUser(DataMixin, CreateView):

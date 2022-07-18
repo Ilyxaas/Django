@@ -14,7 +14,7 @@ class Post(models.Model):
    is_published = models.BooleanField(default=True, verbose_name='Опубликованно')
    likes = models.IntegerField(default=0, verbose_name='Лайки')
    dislikes = models.IntegerField(default=0, verbose_name='Дизлайки')
-   Cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+   cat = models.ForeignKey('Category', on_delete=models.PROTECT)
 
 
    def __str__(self):
